@@ -12,12 +12,12 @@ class App extends Component {
   filter: '',
   }
 
-  checkDuplication = data => {
-    console.log(data.name)
-    if(this.state.contacts.name === data.name) {
-        alert("is already in contacts")
-      };
-  }
+  // checkDuplication = data => {
+  //   this.state.contacts.map(contact => {
+  //     if(contact.name === data.name) {
+  //       alert("is already in contacts")
+  //     };
+  // })
   
   formSubmitHandler = data => {
     this.setState({ contacts: [...this.state.contacts, data]});
@@ -28,8 +28,8 @@ class App extends Component {
     this.setState({ filter: e.currentTarget.value });
   }
 
-  deleteContacts = () => {
-        this.setState({  contacts: [], });
+  deleteContact = (id) => {
+        this.setState(prevState => ({contacts: prevState.contacts.filter(contact => contact.id !== id), }));
     }
   
   render() {
@@ -40,7 +40,6 @@ class App extends Component {
         <Form onSubmit={this.formSubmitHandler} />
         <h2>Contacts</h2>
         <Filter value={this.state.filter} onChange={this.changeFilter} />
-        <button type="button" onClick={this.deleteContacts} className={profileStyles.button}>Delete Contacts</button> 
         <ContactList contacts={filteredContact} onDeleteContact={this.deleteContact} />
       </div >
     )
