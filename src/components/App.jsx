@@ -13,16 +13,17 @@ class App extends Component {
   }
 
   checkDuplication = data => {
-      if([this.state.contacts].some(contact => contact.name === data.name)) {
-       alert(`${data.name} is already in contacts`)
-      } else {
-        this.setState({ contacts: [...this.state.contacts, data] })
-      }
-    }
+    (this.state.contacts.some(contact => contact.name === data.name)) ?
+      alert(`${data.name} is already in contacts`) :
+      this.setState({ contacts: [...this.state.contacts, data] })
+  }
+    
       
-    formSubmitHandler = data => {
-      this.checkDuplication(data);
-    }
+  formSubmitHandler = data => {
+    this.checkDuplication(data);
+    console.log((this.state.contacts.map(contact => contact.name === data.name)));
+    console.log(data.name);
+  }
     
     changeFilter = e => {
       this.setState({ filter: e.currentTarget.value });
